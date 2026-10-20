@@ -10,6 +10,24 @@ Also, it should be indicated by new BPMN models how the sub-processes change. (a
 pages, including the models). Include in the models a sustainability analysis using the SUSAF
 framework as presented in the lectures by John Krogstie.
 
+\subsection{Case 3 - Personalized course selection supported by Generative AI} \label{subsec: tobeCase3}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Images/case3_TO-BE (1).png}
+    \caption{Case 3 TO-BE BPMN model}
+    \label{fig:case3-tobe}
+\end{figure}
+
+Figure~\ref{fig:case3-tobe} presents the TO-BE BPMN model for course selection and registration. As in the AS-IS model, the model consists of two pools: \textit{Student} and \textit{NTNU}. The NTNU pool is now divided into three lanes: \textit{GenAI course recommender}, \textit{Study advisor} and \textit{Studentweb}. The GenAI course recommender is a new system lane, representing an AI service that combines a large language model (LLM) with NTNU's existing data sources. Elements that are new or changed compared to the AS-IS model are marked with a bold outline, and the main improvements are described as annotations in the model.
+
+The process starts in the same way as in the AS-IS model. When course registration is needed, the student logs in to Studentweb using Feide and reviews their education plan and required courses. If no elective courses have to be chosen, the student proceeds directly to registering for courses and exams in Studentweb. If elective courses must be chosen, the student no longer researches the options manually. Instead, the student sends a request for an AI course recommendation, where they state their interests and goals. The request is received in the GenAI course recommender lane, which first retrieves the student record and course data. The student record is retrieved from FS and includes the student's grades and completed courses, while the course data is retrieved from the NTNU course pages and Innsida. Based on this, the service generates a ranked list of recommended courses, where each recommendation includes an explanation of why the course fits the student's profile. Before the recommendations are sent back, a business rule task pre-checks the eligibility of each course against prerequisites and admission rules, so that the student is only recommended courses they can actually register for.
+
+When the recommendations are received, the student compares the recommended options against their own interests and goals. The student is still responsible for the final choice, and the recommendations are only a starting point. An exclusive gateway then represents whether the student needs more guidance. If not, the student moves on to deciding whether a suitable course has been found. If a suitable course is not found, the student can send a new request to the GenAI course recommender, for example with adjusted interests or goals.
+
+If more guidance is needed, the student contacts a study advisor, as in the AS-IS process. The difference lies in how the study advisor handles the question. When the question is received, the study advisor sends a request for an AI recommendation and validity check to the GenAI course recommender. The service retrieves the student record from FS, generates possible solution approaches for the student's situation and runs a validity check on them, before the result is sent back to the study advisor. The study advisor then reviews the AI result and gives guidance to the student. In this part of the process, the AI acts as a sparring partner for the study advisor rather than replacing them. The study advisor is still the one who writes and sends the answer, and is responsible for handling the more complex and individual questions that the AI recommendations alone cannot answer. On the student side, the event-based gateway from the AS-IS model is kept, meaning that the student either receives the advice or decides not to wait any longer after a given number of days. If the advice is received, the student decides whether further clarification is needed, and if so, the study advisor is contacted again.
+
+When a suitable course has been found, the student registers for courses and exams in Studentweb. The registration is received in the Studentweb lane, where it is validated against prerequisites and admission to the course. If the registration is valid, it is saved in FS. If not, an error message is created. In both cases, a response is sent back to the student. Unlike the AS-IS model, the TO-BE model explicitly shows how the student handles this response. If the registration is accepted, the process ends with the courses registered. If the registration is not accepted, for example because of an error or because the course is full, the student returns to the course selection and decides again whether a suitable course has been found.
+
 
 
 
