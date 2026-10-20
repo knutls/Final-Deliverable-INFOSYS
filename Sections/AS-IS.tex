@@ -1,0 +1,122 @@
+\section{AS-IS}
+
+\subsection{Models}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth, trim={15 5 250 5}, clip]{Images/AS-IS.drawio2.pdf}
+    \caption{AS-IS main process at NTNU}
+    \label{fig:asis-main}
+\end{figure}
+
+Figure~\ref{fig:asis-main} presents a high-level BPMN model of the current (AS-IS) learning process at NTNU. The model consists of three pools: \textit{Student}, \textit{NTNU} and \textit{External sensor}. The NTNU pool is divided into lanes representing the systems and actors involved in the process: Studentweb/FS, Canvas, Panopto, Teaching Staff (lecturers and teaching assistants) and Inspera Assessment. The external sensor is modelled as a black-box pool. 
+
+The process starts at the beginning of the semester, when the student selects courses and registers for them in Studentweb. The registration is sent to NTNU, where the student is registered on the courses in FS and subsequently given access to the corresponding course rooms in Canvas. Once the student receives access to the course rooms, the learning activities of the semester begin.
+
+The learning phase is modelled as two parallel tracks. In the lecture track, the teaching staff deliver lectures, which are recorded and published in Canvas through Panopto. A student may attend the lecture in person, review the recording in Canvas, or do both. In the exercise track, the teaching staff publish course material and exercises in Canvas. The student works on the exercises and submits them in Canvas, after which the teaching staff assess the submissions and return feedback to the student.
+
+When both tracks are completed, the student takes a digital exam in Inspera Assessment. The exam answers are made available to an external sensor, who grades the exam and returns the result to NTNU. The teaching staff receive and publish the grades, and the student is notified of the final grade through Studentweb, which concludes the process.
+
+The model is purposely kept at a high level of abstraction. Only three activities are modelled as collapsed sub-processes, as these represent the focus areas of this project: course selection and registration (Case~3), recording and publishing of lecture recordings (Case~1), and assessment of exercises and feedback (Case~2). These sub-processes are elaborated in more detail in the following sections, while the remaining activities are included to provide context for the overall process.
+
+\subsection{Cases/sub process}
+\subsubsection{Case 1 - Lecture content is not searchable or reusable}
+\textbf{Perceived problem:} Lecture recordings at NTNU (delivered via Panopto/Canvas) are stored as raw video with no transcription, summarization, or indexing. Students who want to review a specific concept must scrub through full recordings rather than search for it, and there is no automatically generated study material (summaries, key-point extraction, quiz questions) derived from lecture content. This underuses the opportunity for GenAI-based transcription and summarization highlighted in the case description, and creates inefficiency in how students prepare for exercises and exams.
+
+% \textbf{Knut brukertester en forelesning}
+% \begin{enumerate}
+%     \item Knut går til canvas.ntnu.no
+%     \item går inn på emnet tdt4175
+%     \item trykker på panopto i menyen
+%     \item kan der trykke på subsribe til emnet
+%     \item åpner ønsket forelesning 
+%     \item blir tatt til video view på panopto. 
+%     \item Ser på video, får muligheten til å få oversikt over Contents
+%     \item i Contents ser han at det er kapitler men satt til tittelen på hver slide (og ikke navnet på temaet/kapittelet). Så kan trykke seg frem og tilbake for å prøve å treffe det ønskede temaet
+%     \item kan ta notater
+%     \item det er ikke teksting/transkribering 
+%     \item ikke delt opp i overordnet kapitler 
+%     \item ikke gitt oppsummering 
+%     \item Knut tar egne notater, bruker 3 timer på én forelesning som varer i 90 min.
+%     \item Knut legger inn offentlige kommentater 
+% \end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Images/Case1.png}
+    \caption{Case 1 BPMN model}
+    \label{fig:case1}
+\end{figure}
+
+\textbf{Model description:}
+Figure~\ref{fig:case1} expands the collapsed sub-process \textit{Record and publish lecture recordings} from the main model (Figure~\ref{fig:asis-main}). The model consists of two pools: \textit{Student} and \textit{NTNU}. The NTNU pool is divided into three lanes, \textit{Teaching Staff}, \textit{Panopto} and \textit{Canvas}, representing the staff and the two information systems involved in producing and distributing lecture recordings.
+
+The process starts when a lecture is planned, and the lecturer orders a Panopto recording. This is the only manual step on the NTNU side. Next, an automated recording is scheduled for the lecture. The process then waits at the timer event \textit{Scheduled lecture time reached}. When the lecture starts, Panopto automatically records camera, audio and screen. The output is the data object \textit{Lecture recording}. The recording is then uploaded and stored in the course folder in the \textit{Panopto database}. Finally, the recording is made available in the Canvas course room, and the message end event \textit{Recording published} sends the recording to the student.
+
+All activities on the NTNU side except the first are modelled as service tasks. Once the recording has been ordered, Panopto and Canvas handle capture, storage and distribution without human involvement. However, the systems only \textit{store and distribute} the raw video. No activity in the model processes the content of the recording, such as transcribing it, dividing it into topic-based chapters, summarizing it or generating study material.
+
+In the Student pool, the process starts with the message start event \textit{Recording available in Canvas}, and the student opens the recording in the Canvas course room. The next activity, \textit{Scrub through full recording to find concept}, is modelled as a looping user task. Since the recording has no transcript or topic-based index, the student has to jump back and forth in the video until the relevant part is found. Panopto does generate a table of contents, but it is based on slide titles rather than topics, so it only partly helps the student navigate. Finally, the student writes their own notes and study material. This is modelled as a manual task, since it happens outside the systems. The process ends when the lecture content has been reviewed.
+
+The model shows where the problem described above arises. On the NTNU side, the process is efficient and almost fully automated. The work of making the content usable, however, is pushed onto each individual student, and every student repeats it for every lecture. A walkthrough of a 90-minute lecture in 
+% funker bare å ha med eksemplet om vi har med det knut skriver om i brukertesten
+TDT4175 illustrates this: reviewing it and producing notes took about three hours. The looping search task and the manual note-taking are therefore the main targets for the TO-BE solution presented in Section~\ref{sec:4}.
+% er det faktisk main target for TO-BE??
+
+
+
+\subsubsection{Case 2 - Feedback on exercises and assignments is minimal
+}\textbf{Perceived problem}: Feedback on student exercises and assignments (via Canvas/Inspera)
+is often limited to a numeric grade or a short comment, due to TA workload. Students receive
+little actionable guidance on how to improve their writing, reasoning, or technical solutions,
+which works against the case description's stated goal of "assisting the development of
+students' writing skills and critical thinking/reflecting skills." There is no systematic
+mechanism for scaling detailed, individualized feedback across large course cohorts.
+
+ha med at ai kan lage løsningsforslang?
+% ha med for studass
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Images/Case2.png}
+    \caption{Case 2 BPMN model}
+    \label{fig:case2}
+\end{figure}
+
+\textbf{Model description:}
+Figure~\ref{fig:case2} also expands the collapsed sub-process \textit{Record and publish lecture recordings} from the main model (Figure~\ref{fig:asis-main}). The model consists of two pools: \textit{Student} and \textit{NTNU}. The NTNU pool is divided into two lanes, \textit{Teaching Staff} and \textit{Canvas}, representing the staff and the information system involved in assessing exercises and giving feedback to students.
+
+The process starts when the submission deadline has passed. Canvas automatically locks the assignment and collects the submissions. The teaching staff then distribute the submissions among the teaching assistants.
+
+The assessment of submissions is modeled as a loop that is repeated for each submission. The TA opens a submission and checks the answer against the solution proposal which already exists. The TA then registers a score or pass/fail status, which is stored in the Canvas gradebook. Next, an exclusive gateway represents the decision of whether there is sufficient time to make a comment. If so, the TA writes a short comment. If not, the comment is skipped and the paths merge again. A second exclusive gateway checks whether there are more submissions to assess. If there are, the flow returns to the start of the loop and the next submission is opened.
+
+When all submissions have been assessed, Canvas publishes the scores and comments to the students. This ends the NTNU part of the process with a message end event, \textit{Feedback published}, which sends the feedback with the score and comment to the student. In the Student pool, the process starts when the feedback is received. The student reads the score and comment in Canvas, and the process ends when the feedback has been processed.
+
+The model shows that most of the assessment work is done manually by the teaching staff, while Canvas only handles collecting the submissions and publishing the feedback. Whether a written comment is given depends on the time available to the TA, so students may receive only a score without any further feedback. This is not optimal for the students who wish to improve their work by asking more questions to the teaching staff.
+
+
+\subsubsection{Case 3 - Course selection and study plan personalization in
+Studentweb is static
+}\textbf{Perceived problem}: Studentweb lets students register for courses within a fixed program
+structure, but offers no personalization based on individual interests, career goals, or prior
+performance. Students choosing electives or specialization tracks must research options
+manually across course catalogs and Innsida, with no system-supported recommendation of
+which courses fit their profile or how to structure their remaining study plan. This leaves
+unrealized the case description's interest in personalized learning paths and curriculum
+optimization, instead of an adaptive selection process, students face a static list of options
+with no guidance layered on top
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Images/Case 3 diagram.png}
+    \caption{Case 3 BPMN model}
+    \label{fig:case3}
+\end{figure}
+
+Figure~\ref{fig:case3} presents the AS-IS BPMN model for course selection and registration. The model consists of two pools: \textit{Student} and \textit{NTNU}. The NTNU pool is divided into two lanes representing the study advisor and system involved in the process. Identified pain points are marked as annotations in the model.
+
+The process starts in the Student pool when course registration is needed. The student logs in to Studentweb using Feide and reviews their education plan and required courses. An exclusive gateway then represents whether the student has to choose elective courses. If not, the student proceeds directly to registering for courses and exams in Studentweb. If elective courses must be chosen, the student researches course options manually, using the NTNU course pages and Innsida as information sources, and compares the options against their own interests and goals. As highlighted in the model, there is no personalized recommendation at this stage, and the student must search and compare across several separate sources on their own.
+
+After comparing the options, the student decides whetherthey need advice. If so, the student contacts a study advisor which sends a message to the Study advisor lane. Here, the question is received and the study advisor gives guidance on the course options before sending the advice back to the student. On the student side, an event-based gateway represents the two possible outcomes. Either the advice is received, or no answer has arrived within a given number of days. The length of this waiting period is subjective and depends on how long each student is able to wait. If the advice is received, the student decides whether further clarification is needed. If needed, the study advisor is contacted again. The model highlights that this guidance depends on the student taking the initiative, is not supported by any system, and involves an unknown waiting time before an answer is given.
+
+When the student has either received sufficient advice, chosen not to wait any longer, or did not need advice in the first place, an exclusive gateway checks whether a suitable course has been found. If not, the student returns to researching course options manually. If a suitable course is found, the student registers for courses and exams in Studentweb. The registration is sent to the Studentweb/FS lane, where it is automatically validated against the course's prerequisites and admission requirements. If the registration is valid, it is saved in FS, NTNU's student database. If not, an error message is created. In both cases, a response is sent back to the student, and the process ends when the courses are registered.
+
+The model shows that the course selection part of the process is largely manual and driven by the student, while system support is limited to validating and storing the registration. The step where the student has to decide what to choose, and the only point where personal guidance is available, depends entirely on the student's own research and on the study advisor's availability.
+

@@ -1,0 +1,161 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="case2-asis" name="Case 2 AS-IS: Exercise feedback">
+    <mxGraphModel dx="2310" dy="1746" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontStyle=1;" value="Case 2 (AS-IS): Assess exercises and give feedback" vertex="1">
+          <mxGeometry height="45" width="1200" x="41" y="-50" as="geometry" />
+        </mxCell>
+        <mxCell id="stu" parent="1" style="swimlane;html=1;horizontal=0;startSize=30;fontStyle=1;fontSize=14;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;" value="Student" vertex="1">
+          <mxGeometry height="230" width="2260" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_start" parent="stu" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=top;verticalAlign=bottom;labelBackgroundColor=none;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;fontSize=10;outline=standard;symbol=message;" value="Feedback received" vertex="1">
+          <mxGeometry height="40" width="40" x="1740" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="s_read" parent="stu" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;expand=0;collapsible=0;fontSize=11;taskMarker=user;" value="Read score and comment in Canvas" vertex="1">
+          <mxGeometry height="80" width="130" x="1930" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s_end" parent="stu" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;fontSize=10;outline=end;symbol=none;" value="Feedback&lt;br&gt;processed" vertex="1">
+          <mxGeometry height="40" width="40" x="2170" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="f16" edge="1" parent="stu" source="s_read" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="s_end" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1990" y="85" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ntnu" parent="1" style="swimlane;html=1;horizontal=0;startSize=30;fontStyle=1;fontSize=14;fillColor=#f5f5f5;swimlaneFillColor=#ffffff;" value="NTNU" vertex="1">
+          <mxGeometry height="550" width="2260" x="40" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="L_canvas" parent="ntnu" style="swimlane;html=1;horizontal=0;startSize=30;fontStyle=1;fontSize=12;whiteSpace=wrap;fillColor=#fff2cc;swimlaneFillColor=#ffffff;" value="Canvas" vertex="1">
+          <mxGeometry height="200" width="2230" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c_start" parent="L_canvas" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;fontSize=10;outline=standard;symbol=none;" value="Submission&lt;br&gt;deadline passed" vertex="1">
+          <mxGeometry height="40" width="40" x="50" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="c_collect" parent="L_canvas" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;expand=0;collapsible=0;fontSize=11;taskMarker=service;" value="Lock assignment and collect submissions" vertex="1">
+          <mxGeometry height="80" width="130" x="130" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="ds_gb" parent="L_canvas" style="shape=datastore;html=1;labelPosition=right;verticalLabelPosition=middle;align=left;verticalAlign=middle;spacingLeft=4;labelBackgroundColor=none;fontSize=10;" value="Canvas gradebook" vertex="1">
+          <mxGeometry height="50" width="60" x="935" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="c_pub" parent="L_canvas" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;expand=0;collapsible=0;fontSize=11;taskMarker=service;" value="Publish scores and comments to students" vertex="1">
+          <mxGeometry height="80" width="130" x="1530" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="c_end" parent="L_canvas" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;verticalAlign=top;labelBackgroundColor=none;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;fontSize=10;outline=end;symbol=message;" value="Feedback&lt;br&gt;published" vertex="1">
+          <mxGeometry height="40" width="40" x="1710" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="L_staff" parent="ntnu" style="swimlane;html=1;horizontal=0;startSize=30;fontStyle=1;fontSize=12;whiteSpace=wrap;fillColor=#d5e8d4;swimlaneFillColor=#ffffff;" value="Teaching Staff" vertex="1">
+          <mxGeometry height="360" width="2230" x="30" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="t_dist" parent="L_staff" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;expand=0;collapsible=0;fontSize=11;taskMarker=user;" value="Distribute submissions among TAs" vertex="1">
+          <mxGeometry height="80" width="130" x="300" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g_loop" parent="L_staff" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=bottom;verticalAlign=top;align=center;labelBackgroundColor=none;perimeter=rhombusPerimeter;outlineConnect=0;fontSize=10;outline=none;symbol=none;gwType=exclusive;" value="" vertex="1">
+          <mxGeometry height="50" width="50" x="470" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="t_open" parent="L_staff" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;expand=0;collapsible=0;fontSize=11;taskMarker=user;" value="Open submission" vertex="1">
+          <mxGeometry height="80" width="130" x="560" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="t_assess" parent="L_staff" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;expand=0;collapsible=0;fontSize=11;taskMarker=user;" value="Check answer against solution" vertex="1">
+          <mxGeometry height="80" width="130" x="730" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_sol" parent="L_staff" style="shape=note;size=12;html=1;verticalLabelPosition=bottom;verticalAlign=top;align=center;labelBackgroundColor=none;fontSize=10;" value="Solution proposal" vertex="1">
+          <mxGeometry height="45" width="40" x="775" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="t_grade" parent="L_staff" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;expand=0;collapsible=0;fontSize=11;taskMarker=user;" value="Register score or pass/fail status" vertex="1">
+          <mxGeometry height="80" width="130" x="900" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g_c" parent="L_staff" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=bottom;verticalAlign=top;align=center;labelBackgroundColor=none;perimeter=rhombusPerimeter;outlineConnect=0;fontSize=10;outline=none;symbol=none;gwType=exclusive;" value="Sufficent time to &lt;br&gt;make a comment&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="50" x="1070" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="t_comment" parent="L_staff" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task2;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;expand=0;collapsible=0;fontSize=11;taskMarker=user;" value="Write short comment" vertex="1">
+          <mxGeometry height="80" width="130" x="1160" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="g_m" parent="L_staff" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=bottom;verticalAlign=top;align=center;labelBackgroundColor=none;perimeter=rhombusPerimeter;outlineConnect=0;fontSize=10;outline=none;symbol=none;gwType=exclusive;" value="" vertex="1">
+          <mxGeometry height="50" width="50" x="1330" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="g_more" parent="L_staff" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=top;verticalAlign=bottom;align=center;labelBackgroundColor=none;perimeter=rhombusPerimeter;outlineConnect=0;fontSize=10;outline=none;symbol=none;gwType=exclusive;" value="More submissions&lt;br&gt;to assess?" vertex="1">
+          <mxGeometry height="50" width="50" x="1420" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" edge="1" parent="1" source="c_start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="c_collect" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" edge="1" parent="1" source="c_collect" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="t_dist" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="435" y="385" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f3" edge="1" parent="1" source="t_dist" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="g_loop" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" edge="1" parent="1" source="g_loop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="t_open" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" edge="1" parent="1" source="t_open" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="t_assess" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" edge="1" parent="1" source="t_assess" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="t_grade" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" edge="1" parent="1" source="t_grade" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="g_c" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f8" edge="1" parent="1" source="g_c" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="t_comment" value="Yes">
+          <mxGeometry relative="1" x="-0.2" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f9" edge="1" parent="1" source="g_c" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="g_m" value="No">
+          <mxGeometry relative="1" x="-0.85" as="geometry">
+            <mxPoint x="12" as="offset" />
+            <Array as="points">
+              <mxPoint x="1165" y="530" />
+              <mxPoint x="1425" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f10" edge="1" parent="1" source="t_comment" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="g_m" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f11" edge="1" parent="1" source="g_m" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="g_more" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f12" edge="1" parent="1" source="g_more" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="g_loop" value="Yes">
+          <mxGeometry relative="1" x="-0.95" as="geometry">
+            <mxPoint x="12" as="offset" />
+            <Array as="points">
+              <mxPoint x="1515" y="840" />
+              <mxPoint x="565" y="840" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f13" edge="1" parent="1" source="g_more" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="c_pub" value="No">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint y="-10" as="offset" />
+            <Array as="points">
+              <mxPoint x="1665" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f14" edge="1" parent="1" source="c_pub" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="c_end" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f15" edge="1" parent="1" source="s_start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endSize=8;fontSize=10;" target="s_read" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" edge="1" parent="1" source="c_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;dashPattern=8 4;startArrow=oval;startFill=0;startSize=7;endArrow=block;endFill=0;endSize=8;strokeColor=#6c6c6c;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="s_start" value="Feedback (score and comment)">
+          <mxGeometry relative="1" x="-0.3" as="geometry" />
+        </mxCell>
+        <mxCell id="da1" edge="1" parent="1" source="d_sol" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;dashPattern=1 3;endArrow=open;endFill=0;endSize=8;strokeColor=#6c6c6c;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="t_assess" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2" edge="1" parent="1" source="t_grade" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;dashPattern=1 3;endArrow=open;endFill=0;endSize=8;strokeColor=#6c6c6c;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="ds_gb" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
