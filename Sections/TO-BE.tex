@@ -2,13 +2,44 @@
 
 \subsection{Case 1} \label{subsec: tobeCase1}
 
-4. Teaching at NTNU Next-GenAI: the TO-BE situation – Describe the TO-BE situation by
-detailing how the sub-processes the group focuses on will change due to the new or changed
-use of Generative AI technology. New or changed functionality must be properly described.
-3
-Also, it should be indicated by new BPMN models how the sub-processes change. (approx. 6
-pages, including the models). Include in the models a sustainability analysis using the SUSAF
-framework as presented in the lectures by John Krogstie.
+% 4. Teaching at NTNU Next-GenAI: the TO-BE situation – Describe the TO-BE situation by
+% detailing how the sub-processes the group focuses on will change due to the new or changed
+% use of Generative AI technology. New or changed functionality must be properly described.
+% 3
+% Also, it should be indicated by new BPMN models how the sub-processes change. (approx. 6
+% pages, including the models). Include in the models a sustainability analysis using the SUSAF
+% framework as presented in the lectures by John Krogstie.
+
+% ####################################### utkast
+
+\textbf{Model description:}
+Figure~\ref{fig:case1-tobe} shows the TO-BE version of the sub-process for lecture recordings. As described in the AS-IS analysis (Figure~\ref{fig:case1}), the main problem is that recordings are stored as raw video with no transcription, summary or topic-based index. The only navigation aid is a table of contents based on slide titles. The TO-BE model addresses this by introducing GenAI-based transcription and summarization. Activities, data objects and lanes that are new or changed compared to the AS-IS model are marked in blue.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{Images/Case1-ToBe.png}
+    \caption{Case 1 TO-BE BPMN model}
+    \label{fig:case1-tobe}
+\end{figure}
+
+
+The model keeps the same two pools, \textit{Student} and \textit{NTNU}. A new lane, \textit{AI service}, is added to the NTNU pool between \textit{Canvas} and \textit{Panopto}. It represents a GenAI service integrated with NTNU's existing systems. The first part of the process is unchanged: when a lecture is scheduled in the timetable, the lecturer orders a Panopto recording, Panopto schedules an automated recording, and the lecture is recorded, uploaded and stored in the course folder in the \textit{Panopto database}.
+
+Once the recording is stored, it is processed in the \textit{AI service} lane through three service tasks. First, the recording is transcribed using speech-to-text, which produces a \textit{Transcript}. Second, the transcript and the lecture slides are divided into topic-based chapters with timestamps. This produces a \textit{Topic index with timestamps}, which replaces the slide-title-based table of contents. Third, the service generates a summary, key points and quiz questions from the content of the lecture.
+
+Before anything is published, the generated material is sent to the teaching staff, who review and approve it. This is a new manual control step. It ensures that the lecturer stays responsible for the course content and that errors from the AI service, such as incorrect terminology or misinterpreted content, are caught before they reach the students. The approved material is then published in the Canvas course room together with the recording, and the message end event \textit{Recording and study material published} notifies the student.
+
+In the Student pool, the process starts with the message start event \textit{Recording and study material available}, and the student opens the lecture page in the Canvas course room. Instead of starting with the full video, the student first reads the summary and key points to get an overview of the lecture. An exclusive (XOR) gateway, \textit{Need to review a specific concept?}, then decides the next step. If the answer is yes, the student searches the topic index and transcript for the concept and jumps directly to the timestamp of the relevant segment. If the answer is no, the student continues directly. The two paths merge, and the student tests their understanding with the generated quiz questions. Finally, the student can add their own comments to the generated notes before the process ends with \textit{Lecture content reviewed}.
+
+Compared with the AS-IS model, the two most time-consuming student activities are replaced. The looping task \textit{Scrub through full recording to find concept} is replaced by a targeted search followed by a jump to the right timestamp. The manual task \textit{Write own notes and study material} is replaced by AI-generated material that the student reads, tests themselves on and adds to. The work of making the lecture content usable is thereby moved from each individual student to an automated service, and done once per lecture instead of once per student.
+
+
+
+
+
+
+\subsection{Case 2} \label{subsec: tobeCase2}
+This section describes the TO-BE model for Case 2 "Feedback on exercises and assignments is minimal". 
 
 \subsection{Case 3} \label{subsec: tobeCase3}
 

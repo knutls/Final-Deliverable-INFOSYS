@@ -1,5 +1,41 @@
 \section{AS-IS to TO-BE}
 
+\subsection{Case 1}
+% TODO Endre litt på beskrivelsen, så den ikke blir så lik som c3
+This section compares the AS-IS model for course selection and registration (Figure~\ref{fig:case1}) with the TO-BE model (Figure~\ref{fig:case1-tobe}), and describes what changes, which pain points are addressed, and what new challenges the changes introduce.
+
+\textbf{Overview of changes:}
+Table~\ref{tab:case1-changes} summarizes the main differences between the two models.
+
+% TODO Sett inn endringer her
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{0.22\textwidth}|p{0.34\textwidth}|p{0.34\textwidth}|}
+        \hline
+        \textbf{Aspect} & \textbf{AS-IS} & \textbf{TO-BE} \\
+        \hline
+    \end{tabular}
+    \caption{Main changes from the AS-IS to the TO-BE model for Case 1}
+    \label{tab:case1-changes} 
+\end{table}
+
+% TODO Endre her
+\textbf{From manual research to AI recommendations:}
+The largest change is in the first part of the process, where the student chooses elective courses. In the AS-IS model, the student had to research course options manually and compare them against their own interests and goals, using several separate sources with no personalized recommendation. In the TO-BE model, this is replaced by a single request to the new GenAI course recommender, which collects data from FS, the NTNU course pages and Innsida on behalf of the student. The student therefore no longer has to search across several sources, and receives a ranked list of courses with an explanation of why each course fits their profile. This directly addresses the perceived problem of Case~3, where students faced a static list of options with no guidance layered on top. The task of comparing options is kept, but changed to comparing the recommended options rather than every available course, which makes the comparison smaller and more focused.
+
+In the TO-BE process, the AI is the dominant source of tips and advice in this first part. The decision of whether to ask for help is also changed. In the AS-IS model, the student decided whether they needed advice after their own research, and the study advisor was the only source of personal guidance. In the TO-BE model, the student only needs to contact the study advisor if the AI recommendations are not enough. If no suitable course is found, the student can send a new request to the AI instead of starting a new manual search, which makes each iteration of the loop faster.
+
+\textbf{The study advisor as a reviewer:}
+Contacting the study advisor is still possible, and the student-side flow is unchanged, including the event-based gateway with the waiting time. The change is inside the Study advisor lane. In the AS-IS model, the study advisor gave guidance on the course options without any system support. In the TO-BE model, the study advisor sends a request to the same AI service and receives suggested solution approaches together with an automatic validity check, before reviewing the result and giving guidance. The AI therefore acts as a sparring partner for the study advisor rather than as the advisor. The study advisor is still responsible for writing the answer to the student, and the questions that reach the study advisor are expected to be more complex and individual, since the simpler questions are already answered by the first AI recommendation. This makes the advice system-supported, and should make it faster to produce. However, the waiting time is not removed, as the student still depends on when the study advisor answers. The timer event is therefore kept in the TO-BE model.
+
+\textbf{Registration and error handling:}
+The registration part of the process is mostly unchanged. Studentweb still validates the registration against prerequisites and admission to the course, saves valid registrations in FS, and creates an error message otherwise. Two things are improved. First, because the recommended courses are pre-checked for eligibility before they reach the student, fewer registrations are expected to be rejected. Second, the TO-BE model explicitly shows what happens when a registration is rejected, either because of an error or because the course is full. Instead of the process ending, the student returns to the course selection, so a rejected registration leads to a new choice rather than a dead end.
+
+\textbf{New challenges:}
+The changes also introduce new challenges that NTNU must handle. The GenAI course recommender uses personal data from FS, such as grades and completed courses, which requires a legal basis for the processing under GDPR and clear information to the students about how their data is used. The quality of the recommendations depends on the course pages and Innsida being complete and up to date, and an LLM can produce explanations that sound convincing but are wrong. This is part of the reason why eligibility is checked by business rules rather than by the LLM, and why registrations are still validated in Studentweb. Finally, there is a risk that students rely too much on the recommendations and choose courses without reflecting on them. The model keeps the student responsible for the final choice, and keeps the study advisor in the process for the cases where the AI is not enough.
+
+
+
 
 
 \subsection{Case 3 }
@@ -38,9 +74,6 @@ In the TO-BE process, the AI is the dominant source of tips and advice in this f
 
 \textbf{The study advisor as a reviewer:}
 Contacting the study advisor is still possible, and the student-side flow is unchanged, including the event-based gateway with the waiting time. The change is inside the Study advisor lane. In the AS-IS model, the study advisor gave guidance on the course options without any system support. In the TO-BE model, the study advisor sends a request to the same AI service and receives suggested solution approaches together with an automatic validity check, before reviewing the result and giving guidance. The AI therefore acts as a sparring partner for the study advisor rather than as the advisor. The study advisor is still responsible for writing the answer to the student, and the questions that reach the study advisor are expected to be more complex and individual, since the simpler questions are already answered by the first AI recommendation. This makes the advice system-supported, and should make it faster to produce. However, the waiting time is not removed, as the student still depends on when the study advisor answers. The timer event is therefore kept in the TO-BE model.
-
-\textbf{Registration and error handling:}
-The registration part of the process is mostly unchanged. Studentweb still validates the registration against prerequisites and admission to the course, saves valid registrations in FS, and creates an error message otherwise. Two things are improved. First, because the recommended courses are pre-checked for eligibility before they reach the student, fewer registrations are expected to be rejected. Second, the TO-BE model explicitly shows what happens when a registration is rejected, either because of an error or because the course is full. Instead of the process ending, the student returns to the course selection, so a rejected registration leads to a new choice rather than a dead end.
 
 \textbf{New challenges:}
 The changes also introduce new challenges that NTNU must handle. The GenAI course recommender uses personal data from FS, such as grades and completed courses, which requires a legal basis for the processing under GDPR and clear information to the students about how their data is used. The quality of the recommendations depends on the course pages and Innsida being complete and up to date, and an LLM can produce explanations that sound convincing but are wrong. This is part of the reason why eligibility is checked by business rules rather than by the LLM, and why registrations are still validated in Studentweb. Finally, there is a risk that students rely too much on the recommendations and choose courses without reflecting on them. The model keeps the student responsible for the final choice, and keeps the study advisor in the process for the cases where the AI is not enough.
