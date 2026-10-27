@@ -1,42 +1,78 @@
 \section{AS-IS to TO-BE}
 
 \subsection{Case 1}
-% TODO Endre litt på beskrivelsen, så den ikke blir så lik som c3
-This section compares the AS-IS model for course selection and registration (Figure~\ref{fig:case1}) with the TO-BE model (Figure~\ref{fig:case1-tobe}), and describes what changes, which pain points are addressed, and what new challenges the changes introduce.
+This section compares the AS-IS model for recording and reviewing lectures (Figure~\ref{fig:case1}) with the TO-BE model (Figure~\ref{fig:case1-tobe}). The TO-BE process itself is described in Section~\ref{subsec: tobeCase1}. Here, the focus is on what the change means for the actors involved, how NTNU can carry it out, and what new challenges it introduces.
 
 \textbf{Overview of changes:}
 Table~\ref{tab:case1-changes} summarizes the main differences between the two models.
 
-% TODO Sett inn endringer her
 \begin{table}[H]
     \centering
     \begin{tabular}{|p{0.22\textwidth}|p{0.34\textwidth}|p{0.34\textwidth}|}
         \hline
         \textbf{Aspect} & \textbf{AS-IS} & \textbf{TO-BE} \\
         \hline
+        Processing of the recording & None. Panopto only stores the raw video. & A GenAI service generates a transcript, a topic index and study material from each recording. \\
+        \hline
+        Navigation & Table of contents based on slide titles. The student scrubs through the video. & Searchable transcript and topic index with timestamps. The student jumps directly to the relevant segment. \\
+        \hline
+        Study material & Written from scratch by each student, for every lecture. & Generated once per lecture. The student reads it, tests themselves with quiz questions and adds own comments. \\
+        \hline
+        Teaching staff & Order the recording. & Order the recording, and review and approve the generated material before it is published. \\
+        \hline
+        Key student activity & Scrub through the full recording to find a concept. & Search for the concept and jump to the right timestamp. \\
+        \hline
     \end{tabular}
     \caption{Main changes from the AS-IS to the TO-BE model for Case 1}
-    \label{tab:case1-changes} 
+    \label{tab:case1-changes}
 \end{table}
 
-% TODO Endre her
-\textbf{From manual research to AI recommendations:}
-The largest change is in the first part of the process, where the student chooses elective courses. In the AS-IS model, the student had to research course options manually and compare them against their own interests and goals, using several separate sources with no personalized recommendation. In the TO-BE model, this is replaced by a single request to the new GenAI course recommender, which collects data from FS, the NTNU course pages and Innsida on behalf of the student. The student therefore no longer has to search across several sources, and receives a ranked list of courses with an explanation of why each course fits their profile. This directly addresses the perceived problem of Case~3, where students faced a static list of options with no guidance layered on top. The task of comparing options is kept, but changed to comparing the recommended options rather than every available course, which makes the comparison smaller and more focused.
+\textbf{What the change means:}
+Overall, the change moves the work of making lecture content usable from each individual student to an automated service. In the AS-IS model, every student had to find concepts by scrubbing through the video and write their own notes, and the informal walkthrough showed that a 90-minute lecture took about three hours to review. In the TO-BE model, this work is done once per lecture, and the student can spend the time on understanding the content rather than on finding it. The recording part of the process, where Panopto records and stores the lecture, is kept as it is, and the GenAI service is added after the recording has been stored. This limits the scope of the change, since a system that already works is not replaced. It also makes the transition less risky, as the raw video remains available, and students can fall back on the AS-IS way of working if the generated material is missing or of poor quality. The teaching staff get a new task, since they must approve the material before it is published.
 
-In the TO-BE process, the AI is the dominant source of tips and advice in this first part. The decision of whether to ask for help is also changed. In the AS-IS model, the student decided whether they needed advice after their own research, and the study advisor was the only source of personal guidance. In the TO-BE model, the student only needs to contact the study advisor if the AI recommendations are not enough. If no suitable course is found, the student can send a new request to the AI instead of starting a new manual search, which makes each iteration of the loop faster.
+\textbf{Carrying out the change:}
+The transition can be structured using Lewin's change model of unfreezing, moving and refreezing \parencite{stair}. Before development starts, NTNU must ensure that the recordings are only processed by an AI service covered by a data processing agreement, and that they are not used to train the model. Lecturers must also consent to their recordings being transcribed and summarized, since the lecture content is their work. The pain points from the AS-IS model, and the time spent by students on reviewing a single lecture, can be used to show lecturers and NTNU adminiatration why the change is needed. The solution should then be piloted in a few large courses that are already recorded in Panopto, before it is rolled out to more courses. The launch should take place at the start of a semester, so that students and teaching staff can get used to the new material before the exam period.
 
-\textbf{The study advisor as a reviewer:}
-Contacting the study advisor is still possible, and the student-side flow is unchanged, including the event-based gateway with the waiting time. The change is inside the Study advisor lane. In the AS-IS model, the study advisor gave guidance on the course options without any system support. In the TO-BE model, the study advisor sends a request to the same AI service and receives suggested solution approaches together with an automatic validity check, before reviewing the result and giving guidance. The AI therefore acts as a sparring partner for the study advisor rather than as the advisor. The study advisor is still responsible for writing the answer to the student, and the questions that reach the study advisor are expected to be more complex and individual, since the simpler questions are already answered by the first AI recommendation. This makes the advice system-supported, and should make it faster to produce. However, the waiting time is not removed, as the student still depends on when the study advisor answers. The timer event is therefore kept in the TO-BE model.
-
-\textbf{Registration and error handling:}
-The registration part of the process is mostly unchanged. Studentweb still validates the registration against prerequisites and admission to the course, saves valid registrations in FS, and creates an error message otherwise. Two things are improved. First, because the recommended courses are pre-checked for eligibility before they reach the student, fewer registrations are expected to be rejected. Second, the TO-BE model explicitly shows what happens when a registration is rejected, either because of an error or because the course is full. Instead of the process ending, the student returns to the course selection, so a rejected registration leads to a new choice rather than a dead end.
+\textbf{Changed roles:}
+The teaching staff get the most new work, as they must review and approve the generated material for every lecture. This may be met with resistance, either because it is seen as an extra burden or from a lack of trust in the generated material. Following TAM, the review step will only be done properly if it is perceived as useful and easy to do \parencite{stair,toussaint2025}. It should therefore be integrated in Panopto or Canvas, where the lecturer can approve or edit the material directly, rather than offered as a separate tool. Lecturers should take part in the pilot and be told clearly that they remain responsible for the material published in their course. For the students, the role changes from producing study material from the lectures to using and completing it. Students should be informed that the material is AI-generated and approved by the lecturer. Students in the pilot courses and student representatives can act as early adopters, in line with s' diffusion of innovation.
 
 \textbf{New challenges:}
-The changes also introduce new challenges that NTNU must handle. The GenAI course recommender uses personal data from FS, such as grades and completed courses, which requires a legal basis for the processing under GDPR and clear information to the students about how their data is used. The quality of the recommendations depends on the course pages and Innsida being complete and up to date, and an LLM can produce explanations that sound convincing but are wrong. This is part of the reason why eligibility is checked by business rules rather than by the LLM, and why registrations are still validated in Studentweb. Finally, there is a risk that students rely too much on the recommendations and choose courses without reflecting on them. The model keeps the student responsible for the final choice, and keeps the study advisor in the process for the cases where the AI is not enough.
+The changes also introduce new challenges that NTNU must handle. Recordings contain the voice and image of the lecturer, and sometimes of students asking questions, which is personal data under GDPR and requires a legal basis and clear information. Speech-to-text can misinterpret technical terms or lectures that mix Norwegian and English, and an LLM can produce summaries and quiz questions that sound convincing but are wrong \parencite{qian2025}. The review step is meant to catch these errors, but under time pressure lecturers may approve the material without reading it properly, which would move the problem rather than solve it. There is also a risk that students rely too much on the generated summaries and read them passively, instead of engaging with the lecture, or that fewer students attend the lectures. The TO-BE model counters this by letting the students test themselves with quiz questions and add their own comments, but AI literacy is still a prerequisite. Students need to understand that the generated material can be wrong and should be checked against the recording. Finally, the GenAI service creates a new dependency, which requires someone to own the system and handle errors in the generated material over time.
+
+\textbf{Evaluating the change:}
+To know whether the change has succeeded, NTNU should measure the effects against the AS-IS situation. Relevant indicators are the time students spend on reviewing a lecture compared with the three hours in the AS-IS walkthrough, the amount of students using the transcript, topic index and quiz questions, the share of generated material that the lecturers need to adjust, and student satisfaction with the lecture material, which relates to the net benefits in the DeLone and McLean model \parencite{stair}. A very low adjustment rate combined with reports of errors in the material would indicate that it is being approved without review. When the results are satisfactory, the new process should be made the standard for all recorded lectures, with a clear system owner and routines for reporting and correcting errors.
 
 
 
+\subsection{Case 2}
 
+This section compares the AS-IS model for assessing exercises and giving feedback (Figure 3) with the TO-BE model (Figure X). The TO-BE process itself is described in Section 4.2. Here, the focus is on what the change means for the actors involved, how NTNU can carry it out, and what new challenges it introduces.
+
+\textbf{Overview of changes:} Table 3 summarizes the main differences between the two models.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.22\textwidth}|p{0.33\textwidth}|p{0.33\textwidth}|}
+\hline
+\textbf{Aspect} & \textbf{AS-IS} & \textbf{TO-BE} \\ \hline
+Written feedback & Written by the TA only if there is time. Some students receive only a score. & Drafted by the GenAI feedback assistant for every submission. \\ \hline
+Score & Set by the TA. & Drafted by the GenAI feedback assistant, approved by the TA. \\ \hline
+Basis for assessment & The solution proposal. & The solution proposal and explicit assessment criteria. \\ \hline
+TA's task & Assess each submission and write any comment from scratch. & Review the AI draft, adjust it if needed, and approve it. \\ \hline
+Key decision & Is there sufficient time to make a comment? & Does the AI draft need changes? \\ \hline
+\end{tabular}
+\caption{Main changes from the AS-IS to the TO-BE model for Case 2}
+\end{table}
+
+\textbf{What the change means:} In the AS-IS model, whether a student received written feedback depended on TA workload rather than on what the student needed. In the TO-BE model, every student receives written feedback, and since all drafts are based on the same criteria, the feedback should be more consistent across TAs. The TA's responsibility for the assessment is kept, but the work moves from producing feedback to quality-assuring it. Canvas still collects the submissions and publishes the results, which limits the scope of the change and lets TAs fall back on the AS-IS way of working if the assistant fails.
+
+\textbf{Carrying out the change:} The transition can be structured using Lewin's change model (Stair and Reynolds 2018). Before development starts, NTNU must ensure that submissions are only processed by an AI service covered by a data processing agreement, and that they are not used to train the model. Course coordinators must write explicit assessment criteria for each exercise, since the drafts are never better than the basis they are generated from. The solution should then be piloted in a few large courses with frequent exercises before wider rollout.
+
+\textbf{Changed roles:} The TAs are the actors whose daily work changes the most, as they go from assessing and writing to reviewing and approving. This may be met with resistance, either from a lack of trust in the drafts or from a feeling that the work becomes less meaningful. Following TAM, the TAs will only use the assistant if it is perceived as useful and easy to use (Stair and Reynolds 2018; Toussaint and Krogstie 2025). It should therefore be integrated in the Canvas grading view rather than offered as a separate tool. TAs should take part in the pilot and be told clearly that they remain responsible for every score and comment they approve. Students should be informed that the score and feedback are AI-assisted and approved by a TA.
+
+\textbf{New challenges:} Student submissions are personal data, and processing them in an AI service requires a legal basis under GDPR and clear information to the students. An LLM can produce feedback that sounds convincing but is wrong, for example by marking a correct but unconventional solution as an error. Because the assistant also suggests a score, there is a risk that the TA anchors on it instead of making an independent assessment. Under time pressure, TAs may also approve drafts without reading them properly, which would move the quality problem rather than solve it. This makes AI literacy a prerequisite. TAs need enough understanding of how LLMs fail to recognize plausible but incorrect feedback, and students need to understand that AI-assisted feedback can be wrong and may be questioned. Finally, if many drafts need changes, the expected time saving will not be realized.
+
+\textbf{Evaluating the change:} Success can be measured by the share of submissions receiving written feedback, TA time per submission, and student satisfaction, which relates to net benefits in the DeLone and McLean model (Stair and Reynolds 2018). A very low adjustment rate combined with complaints about feedback quality would indicate that drafts are being approved without review.
 
 \subsection{Case 3 }
 This section compares the AS-IS model for course selection and registration (Figure~\ref{fig:case3}) with the TO-BE model (Figure~\ref{fig:case3-tobe}). The TO-BE process itself is described in Section~\ref{subsec: tobeCase3}. Here, the focus is on what the change means for the actors involved, how NTNU can carry it out, and what new challenges it introduces.
