@@ -1,4 +1,5 @@
-\section{AS-IS to TO-BE}
+\section{AS-IS to TO-BE}\label{sec:transition}
+\begin{comment}
 
 \subsection{Case 1}
 This section compares the AS-IS model for recording and reviewing lectures (Figure~\ref{fig:case1}) with the TO-BE model (Figure~\ref{fig:case1-tobe}). The TO-BE process itself is described in Section~\ref{subsec: tobeCase1}. Here, the focus is on what the change means for the actors involved, how NTNU can carry it out, and what new challenges it introduces.
@@ -115,3 +116,76 @@ The changes also introduce new challenges that NTNU must handle. The use of pers
 
 \textbf{Evaluating the change:}
 To know whether the change has succeeded, NTNU should measure the effects against the AS-IS situation. Relevant indicators are the share of students using the recommender, the number of rejected registrations, the number of inquiries to the study advisors and their response time, and student satisfaction with the course selection, which relates to the net benefits in the DeLone and McLean model \parencite{stair}. When the results are satisfactory, the new process should be made the standard way of choosing courses, with a clear system owner, routines for updating the course pages each semester, and updated guidance on Innsida.
+\end{comment}
+\label{sec:asis-tobe}
+
+The TO-BE main model (Figure~\ref{fig:main_to-be}) keeps every system from the AS-IS model (Figure~\ref{fig:main_as-is}). Studentweb, FS, Canvas, Panopto and Inspera have the same roles as before, and the only new lane is a GenAI service shared by the three cases. Getting to the TO-BE situation is therefore less about building new systems and more about changing the work around them. The important factors are who checks the AI output, which data the service may use, and what must be ready before it is switched on. This is in line with the background, where introducing GenAI at NTNU was described as an organizational change rather than a tool addition. Table~\ref{tab:transition} summarizes the gap in each case.
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{|p{0.15\textwidth}|X|X|X|}
+        \hline
+         & \textbf{Case 1: Lecture recordings} & \textbf{Case 2: Feedback on exercises} & \textbf{Case 3: Course selection} \\
+        \hline
+        \textbf{Kept} & Recording and storage in Panopto, publishing in Canvas, and the raw video & Collection and publishing in Canvas, and the TA's loop over each submission & Validation in Studentweb, storage in FS, and access to study advisors \\
+        \hline
+        \textbf{Removed} & Scrubbing through the full recording and writing notes from scratch & The gateway \textit{Sufficient time to make a comment?} & Manual research across the course pages and Innsida \\
+        \hline
+        \textbf{Added} & Transcript, topic index and study material generated once per lecture & An AI-drafted score and detailed feedback for every submission & Ranked recommendations after a rule-based eligibility check, and AI support for study advisors \\
+        \hline
+        \textbf{New responsibility} & Lecturers approve the generated material & TAs review, adjust and approve each draft & Faculties keep course data up to date, and advisors review AI suggestions \\
+        \hline
+        \textbf{Needed before start} & Data processing agreement and consent from lecturers & Explicit assessment criteria for each exercise & Legal basis for using FS data and an agreement with Sikt \\
+        \hline
+    \end{tabularx}
+    \caption{What is kept, removed and added in each case, and what must be in place before the change}
+    \label{tab:transition}
+\end{table}
+
+
+\subsection{Case 1: Lecture recordings}
+
+\textbf{Prerequisites:}
+In the AS-IS model (Figure~\ref{fig:case1}), the recording process is fully automated and ends when Panopto has stored the video. The TO-BE model (Figure~\ref{fig:case1-tobe}) keeps this part unchanged and adds the GenAI service after the event \textit{Recording stored}. This makes Case 1 the least disruptive of the three changes. Nothing that works today is replaced, and the raw video is still published, so students can fall back on the AS-IS way of working if the generated material is missing or wrong. %It is a typical sustaining innovation, where an existing service is improved rather than replaced \parencite{toussaint2025}.
+
+\textbf{The lecturer's perspective:}
+The lecturer gets the largest new responsibility. In the AS-IS model, the lecturer only ordered the recording. In the TO-BE model, the lecturer must also approve a transcript, summary and quiz questions that are published in their course. Lecturers already worry that recordings reduce attendance and engagement \parencite{ocallaghan2017}, and ready-made summaries may make this worry stronger. The lecture and slides are also the lecturer's own work, so NTNU needs their consent before the service processes them. Since the recordings also contain the voices of students who ask questions, the service must be covered by a data processing agreement that prevents the recordings from being used to train the model. For lecturers to accept the extra task, approval has to be quick, for example a single view in Panopto or Canvas where the material can be read, corrected and approved.
+
+\textbf{Rollout:}
+Lecturers will not adopt the solution at the same pace. Rogers' diffusion of innovation describes how innovators and early adopters take up a new solution first, followed by the majority and finally the laggards \parencite{stair}. Instead of enabling the service for all recorded lectures at once, NTNU should let lecturers opt in, starting with a few large recorded courses where the lecturers are positive. Results from these courses, such as how much time students save, can then be used to convince the majority. The material should be available from the first lecture of the semester, so that students learn to use it well before the exam period.
+
+\textbf{Challenges:}
+For the students, the risk is that the material replaces the lecture instead of supporting it. GenAI summaries can contain errors that sound convincing, and overreliance can weaken students' own critical thinking \parencite{qian2025}. The TO-BE model limits this in two ways. The transcript and topic index are linked to timestamps, so the student can check a summary against what the lecturer actually said, and the quiz questions and own comments keep the student working with the content. This still requires some AI literacy, as students must know that the material is generated and can be wrong. To evaluate the change, NTNU should compare the time spent on one lecture, and also look at learning outcomes. 
+
+
+\subsection{Case 2: Feedback on exercises}
+
+\textbf{The task:}
+The structure of the TA's work is kept. Both the AS-IS model (Figure~\ref{fig:case2}) and the TO-BE model (Figure~\ref{fig:case2tobe}) loop through the submissions one at a time, and the TA still decides the score. What changes is the task inside the loop. The TA starts from an AI draft instead of an empty comment field, and the gateway \textit{Sufficient time to make a comment?} is replaced by \textit{Changes needed?}. Written feedback is therefore no longer what gets cut when time runs out. The change is also limited to exercises in Canvas. The final grade which is set by the external sensor, is not affected, which makes exercises a suitable place to introduce AI-assisted assessment.
+
+\textbf{Prerequisites:}
+In the AS-IS model, the TA checked each answer against the solution proposal. The GenAI service also needs explicit assessment criteria, since a draft is never better than the basis it is generated from. Writing these criteria is a new task for the course coordinator, and it must be done when the exercise is published, before any submission arrives. An exercise without clear criteria should keep the AS-IS process until such criteria are written.
+
+\textbf{Changes:}
+TAs assess exercises the same way every week, so the change means breaking an established routine. Lewin's change model fits this well \parencite{stair}. In the unfreezing phase, the AS-IS pain point that many students only receive a score is used to show TAs and course coordinators why the routine should change. In the moving phase, the assistant is piloted in a few large courses with frequent exercises. Following TAM, TAs will only use it if it is perceived as useful and easy to use, so it should be built into the Canvas grading view they already work in. Refreezing is harder than usual, because most TAs are hired for one semester at a time. Guidelines for reviewing AI drafts must therefore be part of the TA training every semester, not something that is introduced once.
+
+\textbf{Challenges:}
+The main risk is that the review step becomes a formality. GenAI can produce feedback that sounds right but is wrong or biased \parencite{qian2025}, for example by marking a correct but unconventional solution as an error. Because the draft also suggests a score, the TA may anchor on it rather than assess the submission independently, especially with many submissions left. To detect this, the course coordinator should check a sample of approved submissions after each round and follow how often TAs change the drafts. If almost no drafts are changed while students complain about the feedback, drafts are likely being approved unread. Students should be able to see that the feedback is AI-assisted, and ask the TA about it if it seems wrong. The change has succeeded if every student receives written feedback without the TA spending more time per submission than today.
+
+
+\subsection{Case 3: Course selection}
+
+\textbf{Complexity:}
+In Cases 1 and 2, the GenAI service works on content that already passes through the process, a recording or a submission. The course recommender (Figure~\ref{fig:case3-tobe-b}) instead needs data that is not connected to course selection today, like grades and completed courses from FS, and course descriptions from the course pages. In the AS-IS model (Figure~\ref{fig:case3}), these sources were only brought together by the student's own manual research. Since an information system consists of data, people and procedures as well as software \parencite{toussaint2025}, the recommender requires new data flows and new routines for keeping the data correct. Case 3 is therefore the most demanding transition of the three, even though only two tasks change in the student's own process (Figure~\ref{fig:case3-tobe-a}).
+
+\textbf{Prerequisites:}
+Three things must be in place before development starts. First, NTNU needs a legal basis under GDPR for using grades to recommend courses, and access to the data. Second, the eligibility pre-check should use the same prerequisite and admission rules that Studentweb already uses to validate registrations. If the rules differ, the recommender may suggest a course that Studentweb then rejects, which would undo one of the main benefits. Third, the course descriptions must be complete and up to date. Information quality affects both use and net benefits, and recommendations need accurate course descriptions to work. Updating the descriptions must therefore become a fixed routine for the faculties each semester.
+
+\textbf{Role changes:}
+In the AS-IS model, the study advisor was the only source of personal guidance. In the TO-BE model, the recommender handles the first round, and the advisor uses the same service to prepare answers (Figure~\ref{fig:case3-tobe-c}). Advisors may see this as a threat to their role or distrust the suggestions, so they should take part in the pilot and learn where the service fails. 
+
+\textbf{Rollout and challenges:}
+Course selection is concentrated in short periods with fixed deadlines, so a failure during registration hits many students at once. The pilot should run in a few study programmes with many electives and be launched well before a registration period, with the course pages and advisors still available as a fallback. A risk specific to this case is that the recommender steers students. Recommendations based on grades may push some groups away from demanding courses, and courses that are often recommended may become crowded. The explanations attached to each recommendation make it possible to see why a course was suggested, and the student still makes the final choice. During the pilot, NTNU should check whether different groups of students receive systematically different recommendations. Success can be measured by fewer rejected registrations, fewer and faster inquiries to the study advisors, and whether students are satisfied with the courses they chose.
+
+
